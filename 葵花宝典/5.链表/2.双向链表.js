@@ -86,6 +86,10 @@ class DoublyLink {
                 this.tail = node.prev
             }
 
+            // 彻底孤立，避免脏引用导致死循环
+            node.next = undefined
+            node.prev = undefined
+
             this.length--
             return true
         }
