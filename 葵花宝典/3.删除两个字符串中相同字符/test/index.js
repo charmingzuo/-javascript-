@@ -10,6 +10,9 @@ describe('remove same chars', () => {
 
     it('should be removed correctly', () => {
         assert.deepEqual(['Ifyda', 'wib!'], removeIntersection1(str1, str2))
+    })
+
+    it('should be removed correctly', () => {
         assert.deepEqual(['Ifyda', 'wib!'], removeIntersection2(str1, str2))
     })
 })

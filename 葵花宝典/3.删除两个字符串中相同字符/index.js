@@ -1,4 +1,4 @@
-// O(n)
+// 时间复杂度 O(n), 空间复杂度 O(n)
 const removeIntersection1 = (str1, str2) => {
     const set = new Set()
     str1.split('').forEach(c => set.add(c))
@@ -19,7 +19,7 @@ const removeIntersection1 = (str1, str2) => {
     return [str1, str2]
 }
 
-// O(n)
+// 时间复杂度 O(n), 空间复杂度 O(n)
 // 去重->合并->排序，然后找到相邻的字符，即为交集
 const removeIntersection2 = (s1, s2) => {
     if (typeof s1 !== 'string') {
