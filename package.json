@@ -1,0 +1,23 @@
+{
+  "name": "javascript-algorithm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charmingzuo/javascript-algorithm.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charmingzuo/javascript-algorithm/issues"
+  },
+  "homepage": "https://github.com/charmingzuo/javascript-algorithm#readme",
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
+}

@@ -1,0 +1,1 @@
+module.exports = new Array(30 + 1).join('.').split('').map(a=>Math.round(Math.random() * 1000))
