@@ -7,4 +7,9 @@ describe('singleton', () => {
         const b = Singleton.getInstance('world')
         assert.equal(a, b)
     })
+    it('cannot instance by "new" keyword', () => {
+        assert.throws(() => {
+            new Singleton('world')
+        }, Error)
+    })
 })
