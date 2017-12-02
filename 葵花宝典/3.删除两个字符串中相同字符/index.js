@@ -32,15 +32,17 @@ const removeIntersection2 = (s1, s2) => {
         return [s1, s2]
     }
 
-    // 首先去重
+    // 首先各自去重
     const a1 = Array.from(new Set(s1.split('')))
     const a2 = Array.from(new Set(s2.split('')))
 
+    // 再合并
     const mergedArray = a1.concat(a2)
+    // 再排序
     mergedArray.sort()
 
+    // 如果出现2个以上相同的值，表示该值来自2个数组
     const repeats = new Set()
-
     for (let i = 1; i < mergedArray.length; i++) {
         const prev = mergedArray[i - 1]
         const curr = mergedArray[i]
@@ -51,6 +53,7 @@ const removeIntersection2 = (s1, s2) => {
 
     const removeFromRepeats = chr => repeats.has(chr) ? '' : chr
 
+    // 从原字符串中移除相同字符
     return [
         s1.replace(/./g, removeFromRepeats),
         s2.replace(/./g, removeFromRepeats)
