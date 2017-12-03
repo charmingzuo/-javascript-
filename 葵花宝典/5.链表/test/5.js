@@ -1,28 +1,35 @@
 const assert = require('assert')
 const SinglyLink = require('../1.单向链表')
-const DoublyLink = require('../2.双向链表')
-const RingLink = require('../3.双向环形链表')
-const detectLinkIsRing = require('../5.判断链表是否有环')
+const ifLinkHasCircle = require('../5.判断链表是否有环')
 
-describe('detect ring link', () => {
+const newLink = (len, forkPoint = len / 2) => {
+    const list = new Array(len).join('.').split('.').map((v, i) => i + 1)
+    const link1 = new SinglyLink(list)
 
-    it('should be a ring link', () => {
-        const link1 = new RingLink('hello'.split(''))
-        assert.equal(true, detectLinkIsRing(link1))
+    let end = link1.head
+    while (end.next) {
+        end = end.next
+    }
 
-        const link2 = new RingLink('he'.split(''))
-        assert.equal(true, detectLinkIsRing(link2))
+    if (forkPoint > -1) {
+        let i = 0
+        let circle = link1.head
+        while (i++ < forkPoint) {
+            circle = circle.next
+        }
+        end.next = circle
+    }
+
+    return link1
+}
+
+describe('detect circle link', () => {
+    it('should be a circle link', () => {
+        assert.equal(ifLinkHasCircle(newLink(20, 8)), true)
+        assert.equal(ifLinkHasCircle(newLink(20, 0)), true)
     })
-
-    it('should not a ring link', () => {
-        const link1 = new DoublyLink('hello'.split(''))
-        assert.equal(false, detectLinkIsRing(link1))
-
-        const link2 = new SinglyLink('hello'.split(''))
-        assert.equal(false, detectLinkIsRing(link2))
-
-        const link3 = new RingLink(['h'])
-        assert.equal(false, detectLinkIsRing(link3))
+    it('should not be a circle link', () => {
+        assert.equal(ifLinkHasCircle(newLink(20, -1)), false)
     })
 })
 

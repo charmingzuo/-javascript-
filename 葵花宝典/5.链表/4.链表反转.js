@@ -12,7 +12,6 @@ SinglyLink.prototype.reverse = function () {
     // o -> A <- B <- C
 
     while (cur) {
-        console.log(cur + '')
         const next = cur.next // 需要使用临时变量暂存next，否则会被替换掉
         cur.next = prev // 当前节点的next指向前一个节点
 

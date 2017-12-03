@@ -1,14 +1,15 @@
-const list = require('./list')
-const listRandom = require('./list-random')
-const listSorted = require('./list-sorted')
 module.exports = {
     get list() {
-        return Array.from(list)
+        return Array.from(require('./list'))
     },
     get listRandom() {
-        return Array.from(listRandom)
+        return Array.from(require('./list-random'))
     },
-    get listSorted() {
-        return Array.from(listSorted)
+    get listLarge() {
+        const list = new Array(100000)
+        for (let i = 0; i < list.length; i++) {
+            list[i] = Math.round(Math.random() * list.length)
+        }
+        return list
     }
 }

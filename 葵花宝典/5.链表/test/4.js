@@ -2,7 +2,7 @@ const assert = require('assert')
 const SinglyLink = require('../4.链表反转')
 
 describe('singly link reverse', () => {
-    const list = 'ABC'.split('')
+    const list = 'ABCDEFGH'.split('')
     const link1 = new SinglyLink(list)
 
     it('The results by SinglyLink#reverse() and Array#reverse() should be same', () => {

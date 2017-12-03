@@ -1,8 +1,8 @@
 const assert = require('assert')
-const SinglyLink = require('../5.链表排序')
+const SinglyLink = require('../5.链表插入排序')
 
 describe('link insert sort', () => {
-    const list = require('../../0.data')
+    const list = require('../../0.data').list
     const link1 = new SinglyLink(list)
 
     it('sort should be deep same with native sort', () => {

@@ -12,16 +12,13 @@ const sort = (list) => {
 const adjustHeap = (list, len, ni) => {
     const kid1idx = 2 * ni + 1
     const kid2idx = 2 * ni + 2
-
     let larger = ni
-
     if (kid1idx < len && list[kid1idx] > list[larger]) {
         larger = kid1idx
     }
     if (kid2idx < len && list[kid2idx] > list[larger]) {
         larger = kid2idx
     }
-
     if (larger !== ni) {
         swap(list, ni, larger)
         adjustHeap(list, len, larger)
