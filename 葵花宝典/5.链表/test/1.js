@@ -10,11 +10,13 @@ describe('dichotomy search', () => {
 
     it('the link should be initialized correctly', () => {
         assert.equal('hello'.split('').join(','), link1.toString())
+        assert.equal(5, link1.length)
     })
 
     it('the link node should be added correctly', () => {
         link1.add('!')
         assert.equal('hello!'.split('').join(','), link1.toString())
+        assert.equal(6, link1.length)
     })
 
     it('the node in the link should be found', () => {
@@ -25,11 +27,13 @@ describe('dichotomy search', () => {
     it('the link node should be insert correctly', () => {
         link1.insertAfter(3, '~')
         assert.equal('hell~o'.split('').join(','), link1.toString())
+        assert.equal(6, link1.length)
     })
 
     it('the link node should be removed correctly', () => {
         const node1 = link1.findNodeByValue('e')
         link1.remove(node1)
         assert.equal('hllo'.split('').join(','), link1.toString())
+        assert.equal(4, link1.length)
     })
 })

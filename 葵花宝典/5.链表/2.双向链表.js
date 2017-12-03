@@ -1,8 +1,8 @@
 class DoublyLink {
 
     constructor(array = []) {
-        this.head = undefined
-        this.tail = undefined
+        this.head = new LinkNode()
+        this.tail = new LinkNode()
         this.length = 0
 
         if (array.length) {
@@ -11,27 +11,37 @@ class DoublyLink {
     }
 
     add(value) {
-        const newTail = new LinkNode(value)
+        const newNode = new LinkNode(value)
 
         // 为空，添加1项，节点既是头也是尾
         if (this.length === 0) {
-            this.head = this.tail = newTail
+            this.head.next = this.tail.prev = newNode
+            newNode.prev = this.head
+            newNode.next = this.tail
         }
-        // 如果长度为1，表示头尾相同
-        else if (this.length === 1) {
-            this.tail = newTail
-            this.head.next = newTail
-            this.tail.prev = this.head
-        }
-        // 追加到尾部，替换tail
+        // 追加到尾部
         else {
-            const rawTail = this.tail
-            rawTail.next = newTail
-            newTail.prev = rawTail
-            this.tail = newTail
+            const oldNode = this.tail.prev
+            newNode.next = this.tail
+            newNode.prev = oldNode
+            oldNode.next = newNode
+            this.tail.prev = newNode
         }
         this.length++
-        return newTail
+        return newNode
+    }
+
+    insertAfter(index, value) {
+        if (index < 0 || index > this.length - 1) {
+            throw new Error('index out of range')
+        }
+
+        const newNode = new LinkNode(value)
+        const oldNode = this.findNodeByIndex(index)
+        this.insertBetween(newNode, oldNode, oldNode.next)
+
+        this.length++
+        return newNode
     }
 
     insertBefore(index, value) {
@@ -40,27 +50,15 @@ class DoublyLink {
         }
 
         const newNode = new LinkNode(value)
-        const rawNode = this.findNodeByIndex(index)
-
-        // 有 prev 表示 rawNode 不是头
-        if (rawNode.prev) {
-            rawNode.prev.next = newNode
-            newNode.prev = rawNode.prev
-        }
-        // rawNode === head
-        else {
-            this.head = newNode
-        }
-        rawNode.prev = newNode
-        newNode.next = rawNode
+        const oldNode = this.findNodeByIndex(index)
+        this.insertBetween(newNode, oldNode.prev, oldNode)
 
         this.length++
-
         return newNode
     }
 
     remove(node) {
-        let cur = this.head
+        let cur = this.head.next
         let exist = false
 
         while (cur) {
@@ -72,19 +70,10 @@ class DoublyLink {
         }
 
         if (exist) {
-            if (node.prev) {
-                node.prev.next = node.next
-            }
-            if (node.next) {
-                node.next.prev = node.prev
-            }
-
-            if (node === this.head) {
-                this.head = node.next
-            }
-            else if (node === this.tail) {
-                this.tail = node.prev
-            }
+            const prev = node.prev
+            const next = node.next
+            prev.next = next
+            next.prev = prev
 
             // 彻底孤立，避免脏引用导致死循环
             node.next = undefined
@@ -98,9 +87,9 @@ class DoublyLink {
 
     findNodeByIndex(index) {
         let i = 0
-        let cur = this.head
+        let cur = this.head.next
 
-        while (cur) {
+        while (cur && cur !== this.tail) {
             if (index === i) {
                 return cur
             }
@@ -111,10 +100,10 @@ class DoublyLink {
     }
 
     findNodeByValue(value) {
-        let cur = this.head
+        let cur = this.head.next
         let exist = false
 
-        while (cur) {
+        while (cur && cur !== this.tail) {
             if (value === cur.value) {
                 exist = true
                 break
@@ -124,34 +113,22 @@ class DoublyLink {
         return exist ? cur : undefined
     }
 
-    getPrev(node) {
-        let cur = this.head
+    insertBetween(newNode, node1, node2) {
+        node1.next = newNode
+        newNode.prev = node1
 
-        while (cur) {
-            if (node === cur.next) {
-                return cur
-            }
-            cur = cur.next
-        }
-        return undefined
-    }
-
-    getLastNode() {
-        let cur = this.head
-        while (cur && cur.next) {
-            cur = cur.next
-        }
-        return cur
+        node2.prev = newNode
+        newNode.next = node2
     }
 
     toString() {
         let s = []
-        let cur = this.head
-        while (cur) {
+        let cur = this.head.next
+        while (cur && cur !== this.tail) {
             s.push([
-                cur.prev ? cur.prev.toString() : '^',
+                cur.prev === this.head ? '^' : cur.prev.value,
                 '(' + cur.toString() + ')',
-                cur.next ? cur.next.toString() : '$'
+                cur.next === this.tail ? '$': cur.next.value
             ].join(''))
             cur = cur.next
         }

@@ -5,10 +5,14 @@ SinglyLink.prototype.reverse = function () {
         return
     }
 
-    let prev = this.head
+    let prev = this.head.next
     let cur = prev.next
 
+    // o -> A -> B -> C
+    // o -> A <- B <- C
+
     while (cur) {
+        console.log(cur + '')
         const next = cur.next // 需要使用临时变量暂存next，否则会被替换掉
         cur.next = prev // 当前节点的next指向前一个节点
 
@@ -17,8 +21,8 @@ SinglyLink.prototype.reverse = function () {
         cur = next // 下一个节点作为下一次循环的当前节点
     }
 
-    this.head.next = undefined
-    this.head = prev
+    this.head.next.next = undefined
+    this.head.next = prev
 }
 
 module.exports = SinglyLink

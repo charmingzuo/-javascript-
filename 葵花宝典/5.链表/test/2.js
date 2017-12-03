@@ -22,9 +22,14 @@ describe('double link', () => {
         assert.equal('e', node1.value)
     })
 
-    it('the link node should be insert correctly', () => {
-        link1.insertBefore(3, '~')
-        assert.equal('^(h)e,h(e)l,e(l)~,l(~)l,~(l)o,l(o)$', link1.toString())
+    it('the link node should be insert after correctly', () => {
+        link1.insertAfter(3, '~') // hell~o
+        assert.equal(link1.toString(), '^(h)e,h(e)l,e(l)l,l(l)~,l(~)o,~(o)$')
+    })
+
+    it('the link node should be insert before correctly', () => {
+        link1.insertBefore(3, '~') // hel~lo
+        assert.equal(link1.toString(), '^(h)e,h(e)l,e(l)~,l(~)l,~(l)o,l(o)$')
     })
 
     it('the link node should be removed correctly', () => {

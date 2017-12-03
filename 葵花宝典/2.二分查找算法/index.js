@@ -15,9 +15,8 @@ module.exports = (list, target) => {
     let high = list.length - 1
 
     while (low <= high) {
-        mid = low + Math.ceil((high - low) / 2)
+        mid = low + Math.floor((high - low) / 2)
         const guess = list[mid]
-
         if (guess < target) {
             low = mid + 1
         } else if (guess > target) {

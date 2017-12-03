@@ -2,6 +2,7 @@ class SinglyLink {
 
     constructor(array = []) {
         this.length = 0
+        this.head = new LinkNode()
 
         if (array.length) {
             array.forEach(it => this.add(it))
@@ -15,12 +16,20 @@ class SinglyLink {
         if (last) {
             last.next = node
         } else {
-            this.head = node
+            this.head.next = node
         }
         this.length++
     }
 
-    insertAfter(index, value) {
+    insertAfterHead(node) {
+        node = node instanceof LinkNode ? node : new LinkNode(node)
+        const oldHeadNext = this.head.next
+        this.head.next = node
+        node.next = oldHeadNext
+        this.length++
+    }
+
+    insertAfter(index, valueOrNode) {
         if (index < 0 || index > this.length - 1) {
             throw new Error('index out of range')
         }
@@ -28,7 +37,7 @@ class SinglyLink {
         const atNode = this.findNodeByIndex(index)
 
         const rawNext = atNode.next
-        const newNode = atNode.next = new LinkNode(value)
+        const newNode = atNode.next = new LinkNode(valueOrNode)
         if (rawNext) {
             newNode.next = rawNext
         }
@@ -56,7 +65,7 @@ class SinglyLink {
 
     findNodeByIndex(index) {
         let i = 0
-        let cur = this.head
+        let cur = this.head.next
 
         while (cur) {
             if (index === i) {
@@ -69,7 +78,7 @@ class SinglyLink {
     }
 
     findNodeByValue(value) {
-        let cur = this.head
+        let cur = this.head.next
         let exist = false
 
         while (cur) {
@@ -83,7 +92,7 @@ class SinglyLink {
     }
 
     getPrev(node) {
-        let cur = this.head
+        let cur = this.head.next
 
         while (cur) {
             if (node === cur.next) {
@@ -95,16 +104,25 @@ class SinglyLink {
     }
 
     getLastNode() {
-        let cur = this.head
+        let cur = this.head.next
         while (cur && cur.next) {
             cur = cur.next
         }
         return cur
     }
 
+    swap(aPrev, a, bPrev, b) {
+        const aNext = a.next
+        const bNext = b.next
+        aPrev.next = b
+        b.next = aNext
+        bPrev.next = a
+        a.next = bNext
+    }
+
     toString() {
         let s = []
-        let cur = this.head
+        let cur = this.head.next
         while (cur) {
             s.push(cur.toString())
             cur = cur.next
@@ -123,5 +141,7 @@ class LinkNode {
         return String(this.value)
     }
 }
+
+SinglyLink.LinkNode = LinkNode
 
 module.exports = SinglyLink

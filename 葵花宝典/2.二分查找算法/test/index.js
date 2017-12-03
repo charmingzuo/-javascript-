@@ -1,6 +1,6 @@
 const assert = require('assert')
 const dichotomySearch = require('../index')
-const list = require('../../0.data/list-sorted')
+const list = require('../../0.data').list
 
 describe('dichotomy search', () => {
     it('should not found', () => {
