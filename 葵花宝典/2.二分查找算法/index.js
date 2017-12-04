@@ -1,4 +1,3 @@
-// 时间复杂度 O(log n), n = list.length
 module.exports = (list, target) => {
     if (!Array.isArray(list)) {
         throw new Error('arg 1 should be an Array')

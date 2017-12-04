@@ -2,10 +2,6 @@ const SinglyLink = require('../5.链表/1.单向链表')
 
 module.exports = SinglyLink
 
-/**
- * 时间平均复杂度O(n²)
- * 空间复杂度O(1)
- */
 SinglyLink.prototype.insertSort = function () {
     if (this.length < 2) {
         return

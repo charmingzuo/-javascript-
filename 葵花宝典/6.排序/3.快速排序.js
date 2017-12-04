@@ -1,9 +1,3 @@
-/**!
- * 时间复杂度 O(n log n)
- * 空间复杂度 O(1)
- * 稳定
- */
-
 const quickSort = (list, random = true) => {
 
     // 基线条件
@@ -17,7 +11,7 @@ const quickSort = (list, random = true) => {
         if (random) {
             mid = list.splice(Math.floor(Math.random() * list.length), 1)[0]
         }
-        // 每次都取第1个，对于已经排好序的数组来说，时间复杂度为 O(n²)
+        // 每次都取第1个，最差情况下时间复杂度为 O(n²)
         else {
             mid = list.splice(0, 1)[0]
         }
