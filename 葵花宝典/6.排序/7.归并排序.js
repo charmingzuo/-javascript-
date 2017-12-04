@@ -17,6 +17,7 @@ const sort = (list) => {
 const mergeSort = (listA, listB) => {
     let ai = 0, bi = 0, mi = 0
     let merge = new Array(listA.length + listB.length)
+
     while (ai < listA.length && bi < listB.length) {
         if (listA[ai] < listB[bi]) {
             merge[mi++] = listA[ai++]
