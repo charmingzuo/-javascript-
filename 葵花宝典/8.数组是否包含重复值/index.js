@@ -2,21 +2,19 @@
 
 module.exports = (list) => {
     let v, o
-    for (let i = 0; i < list.length;) {
+    for (let i = 0; i < list.length; i++) {
         v = list[i]
         o = list[v]
         if (v !== i) { // 下标和数值不同，需要置换
-            // 目标位置已经出现相同的值
+            // 置换前检查，如果数值对应的下标位置已经出现"下标=值"的情况，则结束
             if (list[v] === v) {
                 return v
             }
-            // 将 i 所在的值置换到其对应的下标上
+            // 将值放到对应的下标位置
             else {
                 list[v] = v
                 list[i] = o
             }
-        } else {
-            i++
         }
     }
 
