@@ -52,4 +52,4 @@ exports.m2n = (v, m, n) => {
 
 // let n = 36;
 // [0, 1, -10, 25, 26, 36].forEach(v => console.log([v, '的', n, '进制=', exports.decimal2N(v, n), v.toString(n)].join(' ')))
-console.log(exports.m2Decimal('4t', 32))
+// console.log(exports.m2Decimal('4t', 32))
