@@ -36,8 +36,9 @@ const mergeSort = (a, b, results) => {
 }
 
 let results = new Set()
-// const list = [1, 7, 2, 9, 6, 4, 5, 13]
-// const list = [1, 2, 3, 4, 5, 6, 7]
-const list = [7, 6, 5, 4, 3, 2, 1]
+let list = [6, 17, 2, 9, 1, 4, 5, 13, 8]
 sort(list, results)
-console.log(results)
+
+let r = Array.from(results)
+r.sort((a,b)=>a-b)
+console.log(r)

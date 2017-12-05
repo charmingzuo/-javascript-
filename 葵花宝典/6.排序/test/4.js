@@ -1,39 +1,32 @@
 const assert = require('assert')
-const heapSortAD = require('../4.堆排序[支持顺序或倒序]')
-const heapSort = require('../4.堆排序[顺序]')
+const heapSort = require('../4.堆排序')
+const heapSortRecursion = require('../4.堆排序[递归]')
+
+const listASC = require('../../0.data').list
+listASC.sort((a, b) => a - b)
+const listDESC = require('../../0.data').list
+listDESC.sort((a, b) => b - a)
 
 describe('heap sort', () => {
-    describe('with asc/desc', () => {
-        it('sort should be deep same with native sort', () => {
-            const list1 = require('../../0.data').list
-            const list2 = require('../../0.data').list
+    it('sort asc should be same with native sort', () => {
+        const list1 = require('../../0.data').list
 
-            list2.sort((a, b) => a - b)
-
-            heapSort(list1)
-            assert.deepEqual(list1, list2)
-        })
+        heapSort.asc(list1)
+        assert.deepEqual(list1, listASC)
     })
 
-    describe('with asc/desc', () => {
-        it('sort asc should be deep same with native sort', () => {
-            const list1 = require('../../0.data').list
-            const listAsc = require('../../0.data').list
+    it('sort desc should be same with native sort', () => {
+        const list1 = require('../../0.data').list
 
-            listAsc.sort((a, b) => a - b)
-
-            heapSortAD.asc(list1)
-            assert.deepEqual(list1, listAsc)
-        })
-
-        it('sort desc should be deep same with native sort', () => {
-            const list1 = require('../../0.data').list
-            const listDesc = require('../../0.data').list
-
-            listDesc.sort((a, b) => b - a)
-
-            heapSortAD.desc(list1)
-            assert.deepEqual(list1, listDesc)
-        })
+        heapSort.desc(list1)
+        assert.deepEqual(list1, listDESC)
     })
+
+    it('sort asc by recursion should be same with native sort', () => {
+        const list1 = require('../../0.data').list
+
+        const results = heapSortRecursion(list1)
+        assert.deepEqual(results, listASC)
+    })
+
 })
