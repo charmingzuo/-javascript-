@@ -1,6 +1,5 @@
 const assert = require('assert')
 const heapSort = require('../4.堆排序')
-const heapSortRecursion = require('../4.堆排序[递归]')
 
 const listASC = require('../../0.data').list
 listASC.sort((a, b) => a - b)
@@ -20,13 +19,6 @@ describe('heap sort', () => {
 
         heapSort.desc(list1)
         assert.deepEqual(list1, listDESC)
-    })
-
-    it('sort asc by recursion should be same with native sort', () => {
-        const list1 = require('../../0.data').list
-
-        const results = heapSortRecursion(list1)
-        assert.deepEqual(results, listASC)
     })
 
 })

@@ -1,5 +1,5 @@
 const assert = require('assert')
-const sort = require('../8.二叉树排序')
+const sort = require('../8.二叉排序树')
 
 describe('merge sort', () => {
     it('sort should be deep same with native sort', () => {
